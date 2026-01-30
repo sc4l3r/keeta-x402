@@ -1,0 +1,38 @@
+{
+  "name": "keeta-x402",
+  "version": "0.1.0",
+  "description": "Example of how to use x402 with Keeta",
+  "type": "module",
+  "scripts": {
+    "client": "npx ts-node src/client/main.ts",
+    "facilitator": "npx ts-node src/facilitator/main.ts",
+    "server": "npx ts-node src/server/main.ts"
+  },
+  "keywords": [],
+  "author": "sc4l3r",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sc4l3r/keeta-x402"
+  },
+  "packageManager": "pnpm@10.5.0",
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.0.0",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@keetanetwork/keetanet-client": "^0.14.14",
+    "@x402/core": "^2.2.0",
+    "@x402/express": "^2.2.0",
+    "@x402/fetch": "^2.2.0",
+    "@x402/keeta": "link:../coinbase-x402/typescript/packages/mechanisms/keeta",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "pkcs11js"
+    ]
+  }
+}
