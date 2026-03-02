@@ -154,10 +154,6 @@ async function main() {
 }
 
 main()
-  .then(() => {
-    console.log("Facilitator stopped");
-    process.exit(0);
-  })
   .catch((error) => {
     console.error("Facilitator stopped with error:", error);
     process.exit(1);
