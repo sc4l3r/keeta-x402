@@ -22,8 +22,6 @@ async function main() {
     return;
   }
 
-  const feeSponsored = process.env.FACILITATOR_SPONSOR_FEES === "true";
-
   const account = KeetaNet.lib.Account.fromSeed(
     await KeetaNet.lib.Account.seedFromPassphrase(
       process.env.FACILITATOR_PASSPHRASE,
@@ -59,7 +57,6 @@ async function main() {
     signer: keetaSigner,
     // Keeta Testnet
     networks: KEETA_TESTNET_CAIP2,
-    feeSponsored,
   });
 
   // Initialize Express app
