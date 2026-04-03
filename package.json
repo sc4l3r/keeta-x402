@@ -22,7 +22,7 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "@keetanetwork/keetanet-client": "^0.14.14",
+    "@keetanetwork/keetanet-client": "^0.16.1",
     "@x402/core": "2.4.0",
     "@x402/express": "2.4.0",
     "@x402/fetch": "2.4.0",
