@@ -6,7 +6,7 @@ import express from "express";
 import { x402ResourceServer, HTTPFacilitatorClient } from "@x402/core/server";
 import { paymentMiddleware } from "@x402/express";
 import { KEETA_TESTNET_CAIP2 } from "@x402/keeta";
-import { registerExactKeetaScheme } from "@x402/keeta/exact/server";
+import { ExactKeetaScheme } from "@x402/keeta/exact/server";
 
 dotenv.config();
 
@@ -26,7 +26,7 @@ function main() {
 
   // Create resource server and register Keeta scheme
   const server = new x402ResourceServer(facilitatorClient);
-  registerExactKeetaScheme(server);
+  server.register(KEETA_TESTNET_CAIP2, new ExactKeetaScheme());
 
   app.use(
     paymentMiddleware(

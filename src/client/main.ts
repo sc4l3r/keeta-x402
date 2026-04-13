@@ -5,7 +5,7 @@ import * as dotenv from "dotenv";
 import * as KeetaNet from "@keetanetwork/keetanet-client";
 import { x402Client, x402HTTPClient } from "@x402/core/client";
 import { wrapFetchWithPayment } from "@x402/fetch";
-import { registerExactKeetaScheme, toClientKeetaSigner } from "@x402/keeta";
+import { ExactKeetaScheme, KEETA_TESTNET_CAIP2, toClientKeetaSigner } from "@x402/keeta";
 
 dotenv.config();
 
@@ -23,7 +23,7 @@ async function main() {
   const clientKeetaSigner = toClientKeetaSigner(account);
 
   const client = new x402Client();
-  registerExactKeetaScheme(client, { signer: clientKeetaSigner });
+  client.register(KEETA_TESTNET_CAIP2, new ExactKeetaScheme(clientKeetaSigner));
 
   const fetchWithPayment = wrapFetchWithPayment(fetch, client);
 

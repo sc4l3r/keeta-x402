@@ -23,16 +23,11 @@
   },
   "dependencies": {
     "@keetanetwork/keetanet-client": "^0.16.1",
-    "@x402/core": "2.4.0",
-    "@x402/express": "2.4.0",
-    "@x402/fetch": "2.4.0",
+    "@x402/core": "2.9.0",
+    "@x402/express": "2.9.0",
+    "@x402/fetch": "2.9.0",
     "@x402/keeta": "link:../coinbase-x402/typescript/packages/mechanisms/keeta",
     "dotenv": "^17.2.3",
     "express": "^5.2.1"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "pkcs11js"
-    ]
   }
 }

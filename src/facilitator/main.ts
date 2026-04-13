@@ -12,7 +12,7 @@ import type {
   VerifyResponse,
 } from "@x402/core/types";
 import { toFacilitatorKeetaSigner, KEETA_TESTNET_CAIP2 } from "@x402/keeta";
-import { registerExactKeetaScheme } from "@x402/keeta/exact/facilitator";
+import { ExactKeetaScheme } from "@x402/keeta/exact/facilitator";
 
 dotenv.config();
 
@@ -52,12 +52,7 @@ async function main() {
       console.log("Settle failure", context);
     });
 
-  // Register Keeta scheme using the register helper
-  registerExactKeetaScheme(facilitator, {
-    signer: keetaSigner,
-    // Keeta Testnet
-    networks: KEETA_TESTNET_CAIP2,
-  });
+  facilitator.register(KEETA_TESTNET_CAIP2, new ExactKeetaScheme(keetaSigner));
 
   // Initialize Express app
   const app = express();
@@ -150,8 +145,7 @@ async function main() {
   });
 }
 
-main()
-  .catch((error) => {
-    console.error("Facilitator stopped with error:", error);
-    process.exit(1);
-  });
+main().catch((error) => {
+  console.error("Facilitator stopped with error:", error);
+  process.exit(1);
+});
