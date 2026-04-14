@@ -1,4 +1,5 @@
 packages:
   - "apps/*"
+  - "deployment/"
   - "x402/typescript/packages/core"
   - "x402/typescript/packages/mechanisms/keeta"

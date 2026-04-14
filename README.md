@@ -43,6 +43,16 @@ Once the client completed, you should see the payment settle response as the out
 }
 ```
 
+## Project Structure
+
+```
+apps/
+  facilitator/    Keeta x402 facilitator
+  server/         Example resource server with paid weather API that accepts Keeta payments
+  client/         Example client that pays for API access on Keeta
+deployment/       Pulumi infrastructure for GCP deployment
+```
+
 ## Run via Docker Compose
 
 The facilitator and server can be build and run using the [Dockerfile](./Dockerfile) and [compose.yaml](compose.yaml):
@@ -52,3 +62,7 @@ docker compose up
 ```
 
 This requires that you've set up a `.env` following the `.env.example` file.
+
+## Deployment
+
+The faciliator and resource-server can be deployed via Pulumi, see [Deployment](./deployment/README.md) for more information.
