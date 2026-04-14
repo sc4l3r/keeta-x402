@@ -4,9 +4,11 @@
   "description": "Example of how to use x402 with Keeta",
   "type": "module",
   "scripts": {
-    "client": "npx ts-node src/client/main.ts",
-    "facilitator": "npx ts-node src/facilitator/main.ts",
-    "server": "npx ts-node src/server/main.ts"
+    "facilitator": "pnpm --filter facilitator start",
+    "resource-server": "pnpm --filter server start",
+    "client": "pnpm --filter client start",
+    "build": "pnpm --filter facilitator build && pnpm --filter server build",
+    "typecheck": "pnpm -r exec tsc --noEmit"
   },
   "keywords": [],
   "author": "sc4l3r",
@@ -16,18 +18,10 @@
     "url": "https://github.com/sc4l3r/keeta-x402"
   },
   "packageManager": "pnpm@10.5.0",
-  "devDependencies": {
-    "@types/express": "^5.0.6",
-    "@types/node": "^25.0.0",
-    "typescript": "^5.9.3"
-  },
-  "dependencies": {
-    "@keetanetwork/keetanet-client": "^0.16.1",
-    "@x402/core": "2.9.0",
-    "@x402/express": "2.9.0",
-    "@x402/fetch": "2.9.0",
-    "@x402/keeta": "link:../coinbase-x402/typescript/packages/mechanisms/keeta",
-    "dotenv": "^17.2.3",
-    "express": "^5.2.1"
+  "pnpm": {
+    "overrides": {
+      "@x402/keeta": "workspace:*",
+      "@x402/core": "workspace:*"
+    }
   }
 }

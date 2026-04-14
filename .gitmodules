@@ -1,0 +1,4 @@
+[submodule "x402"]
+	path = x402
+	url = https://github.com/sc4l3r/coinbase-x402.git
+	branch = feat/keeta-implementation

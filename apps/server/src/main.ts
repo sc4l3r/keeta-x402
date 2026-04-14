@@ -8,7 +8,9 @@ import { paymentMiddleware } from "@x402/express";
 import { KEETA_TESTNET_CAIP2 } from "@x402/keeta";
 import { ExactKeetaScheme } from "@x402/keeta/exact/server";
 
-dotenv.config();
+dotenv.config({
+  path: '../../.env'
+});
 
 function main() {
   const app = express();
@@ -21,7 +23,7 @@ function main() {
 
   // Create facilitator client
   const facilitatorClient = new HTTPFacilitatorClient({
-    url: "http://localhost:4022",
+    url: process.env.FACILITATOR_URL || "http://localhost:4022",
   });
 
   // Create resource server and register Keeta scheme
@@ -64,9 +66,17 @@ function main() {
     });
   });
 
-  app.listen(4021, () => {
-    console.log(`Server listening at http://localhost:4021`);
+  const port = parseInt(process.env.PORT || "4021");
+  const httpServer = app.listen(port, () => {
+    console.log(`Server listening at http://localhost:${port}`);
   });
+
+  const shutdown = () => {
+    console.log("Shutting down...");
+    httpServer.close(() => process.exit(0));
+  };
+  process.on("SIGTERM", shutdown);
+  process.on("SIGINT", shutdown);
 }
 
 main();

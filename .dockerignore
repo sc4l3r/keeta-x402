@@ -1,0 +1,13 @@
+.pnpm-store/
+node_modules/
+dist/
+.env
+.env.*
+.git/
+README.md
+
+# We only need the x402 TypeScript package sources, exclude everything else
+x402/
+!x402/typescript/
+x402/typescript/**/node_modules/
+x402/typescript/**/dist/
