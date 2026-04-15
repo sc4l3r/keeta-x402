@@ -3,6 +3,8 @@
 import dotenv from "dotenv";
 import express from "express";
 
+import { Log as Logger } from "@keetanetwork/anchor/lib/log/index.js";
+import LogTargetConsole from "@keetanetwork/anchor/lib/log/target_console.js";
 import * as KeetaNet from "@keetanetwork/keetanet-client";
 import { x402Facilitator } from "@x402/core/facilitator";
 import type {
@@ -14,13 +16,24 @@ import type {
 import { toFacilitatorKeetaSigner, KEETA_TESTNET_CAIP2 } from "@x402/keeta";
 import { ExactKeetaScheme } from "@x402/keeta/exact/facilitator";
 
-dotenv.config();
+type LogTargetLevel = NonNullable<
+  NonNullable<ConstructorParameters<typeof LogTargetConsole>[0]>["logLevel"]
+>;
+
+dotenv.config({
+  path: '../../.env'
+});
 
 async function main() {
   if (!process.env.FACILITATOR_PASSPHRASE) {
     console.error("FACILITATOR_PASSPHRASE environment variable is not set");
     return;
   }
+
+  const logLevel = (process.env.APP_LOG_LEVEL ?? "INFO") as LogTargetLevel;
+  const logger = new Logger();
+  logger.registerTarget(new LogTargetConsole({ logLevel }));
+  logger.startAutoSync();
 
   const account = KeetaNet.lib.Account.fromSeed(
     await KeetaNet.lib.Account.seedFromPassphrase(
@@ -34,22 +47,22 @@ async function main() {
 
   const facilitator = new x402Facilitator()
     .onBeforeVerify(async (context) => {
-      console.log("Before verify", context);
+      logger.debug("Before verify", context);
     })
     .onAfterVerify(async (context) => {
-      console.log("After verify", context);
+      logger.debug("After verify", context);
     })
     .onVerifyFailure(async (context) => {
-      console.log("Verify failure", context);
+      logger.error("Verify failure", context);
     })
     .onBeforeSettle(async (context) => {
-      console.log("Before settle", context);
+      logger.debug("Before settle", context);
     })
     .onAfterSettle(async (context) => {
-      console.log("After settle", context);
+      logger.info("Transaction settled", context);
     })
     .onSettleFailure(async (context) => {
-      console.log("Settle failure", context);
+      logger.error("Settle failure", context);
     });
 
   facilitator.register(KEETA_TESTNET_CAIP2, new ExactKeetaScheme(keetaSigner));
@@ -132,7 +145,7 @@ async function main() {
       const response = facilitator.getSupported();
       res.json(response);
     } catch (error) {
-      console.error("Supported error:", error);
+      logger.error("Supported error:", error);
       res.status(500).json({
         error: error instanceof Error ? error.message : "Unknown error",
       });
@@ -140,9 +153,22 @@ async function main() {
   });
 
   // Start the server
-  app.listen(4022, () => {
-    console.log("Facilitator listening at http://localhost:4022");
+  const port = parseInt(process.env.PORT || "4022");
+  const server = app.listen(port, () => {
+    logger.info(`Facilitator listening at http://localhost:${port}`);
   });
+
+  const shutdown = async () => {
+    logger.info("Shutting down...");
+
+    logger.stopAutoSync();
+    await logger.sync();
+
+    server.close(() => process.exit(0));
+  };
+
+  process.on("SIGTERM", shutdown);
+  process.on("SIGINT", shutdown);
 }
 
 main().catch((error) => {

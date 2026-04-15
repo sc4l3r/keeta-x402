@@ -6,18 +6,20 @@ An example of how to use the `@x402/keeta` library as a client, server, and faci
 
 ## Requirements
 
-Since the Keeta x402 implementation is still work in progress, running the examples in this repo requires that you have cloned our x402 implementation for Keeta locally, into the same directory you cloned this repo to:
+Since the Keeta x402 implementation is still work in progress, the `@x402/keeta` package is included as a git submodule.
+Clone the repo with submodules:
 
 ```bash
-git clone -b feat/keeta-implementation https://github.com/sc4l3r/coinbase-x402
-cd coinbase-x402/typescript/packages/mechanisms/keeta
-pnpm build
+git clone https://github.com/sc4l3r/keeta-x402
+cd keeta-x402
+git submodule update --init
 ```
 
-Then in this directory, install the NPM dependencies:
+Then install the dependencies and build our x402 fork:
 
 ```bash
 pnpm install
+pnpm --filter @x402/keeta --filter @x402/core build
 ```
 
 Copy `.env.example` to `.env` and fill in the values.
@@ -26,9 +28,9 @@ Use the [Faucet](https://faucet.test.keeta.com/) to request testnet KTA for your
 
 ## Usage
 
-1. Start the facilitator: `pnpm run facilitator`
-1. Start the resource server: `pnpm run server`
-1. Start the client to make a request to the server: `pnpm run client`
+1. Start the facilitator: `pnpm facilitator`
+1. Start the resource server: `pnpm resource-server`
+1. Start the client to make a request to the server: `pnpm client`
 
 Once the client completed, you should see the payment settle response as the output:
 
