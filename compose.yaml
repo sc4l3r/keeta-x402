@@ -1,0 +1,18 @@
+services:
+  facilitator:
+    build:
+       context: .
+       target: facilitator
+    env_file:
+       - .env
+
+  server:
+    build:
+      context: .
+      target: server
+    environment:
+      FACILITATOR_URL: "http://facilitator:4022"
+    env_file:
+      - .env
+    depends_on:
+      - facilitator

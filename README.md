@@ -42,3 +42,13 @@ Once the client completed, you should see the payment settle response as the out
   payer: '<client address>'
 }
 ```
+
+## Run via Docker Compose
+
+The facilitator and server can be build and run using the [Dockerfile](./Dockerfile) and [compose.yaml](compose.yaml):
+
+```shell
+docker compose up
+```
+
+This requires that you've set up a `.env` following the `.env.example` file.
