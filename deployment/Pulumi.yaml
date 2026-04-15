@@ -1,0 +1,6 @@
+name: keeta-x402
+runtime:
+  name: nodejs
+  options:
+    packagemanager: pnpm
+description: Keeta x402 Facilitator and Server deployment

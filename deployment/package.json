@@ -1,0 +1,15 @@
+{
+  "name": "deployment",
+  "private": true,
+  "type": "module",
+  "main": "index.ts",
+  "dependencies": {
+    "@keetanetwork/pulumi-components": "^1.0.85",
+    "@pulumi/gcp": "^9.19.0",
+    "@pulumi/pulumi": "^3.230.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.9.3"
+  }
+}

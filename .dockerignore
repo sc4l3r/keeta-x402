@@ -4,6 +4,7 @@ dist/
 .env
 .env.*
 .git/
+deployment/
 README.md
 
 # We only need the x402 TypeScript package sources, exclude everything else
