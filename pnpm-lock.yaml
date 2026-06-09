@@ -16,8 +16,8 @@ importers:
   apps/client:
     dependencies:
       '@keetanetwork/keetanet-client':
-        specifier: ^0.16.1
-        version: 0.16.1(encoding@0.1.13)
+        specifier: ^0.18.1
+        version: 0.18.1(encoding@0.1.13)
       '@x402/core':
         specifier: workspace:*
         version: link:../../x402/typescript/packages/core
@@ -41,11 +41,11 @@ importers:
   apps/facilitator:
     dependencies:
       '@keetanetwork/anchor':
-        specifier: ^0.0.53
-        version: 0.0.53(@types/node@25.6.0)(encoding@0.1.13)(typescript@5.9.3)
+        specifier: ^0.0.77
+        version: 0.0.77(@types/node@25.6.0)(encoding@0.1.13)(typescript@5.9.3)
       '@keetanetwork/keetanet-client':
-        specifier: ^0.16.1
-        version: 0.16.1(encoding@0.1.13)
+        specifier: ^0.18.1
+        version: 0.18.1(encoding@0.1.13)
       '@x402/core':
         specifier: workspace:*
         version: link:../../x402/typescript/packages/core
@@ -140,7 +140,7 @@ importers:
         specifier: ^8.4.0
         version: 8.5.1(postcss@8.5.9)(tsx@4.21.0)(typescript@5.9.3)
       tsx:
-        specifier: ^4.19.2
+        specifier: ^4.21.0
         version: 4.21.0
       typescript:
         specifier: ^5.7.3
@@ -158,11 +158,11 @@ importers:
   x402/typescript/packages/mechanisms/keeta:
     dependencies:
       '@keetanetwork/anchor':
-        specifier: ^0.0.50
-        version: 0.0.50(@types/node@22.19.17)(encoding@0.1.13)(typescript@5.9.3)
+        specifier: ^0.0.77
+        version: 0.0.77(@types/node@22.19.17)(encoding@0.1.13)(typescript@5.9.3)
       '@keetanetwork/keetanet-client':
-        specifier: ^0.16.1
-        version: 0.16.1(encoding@0.1.13)
+        specifier: ^0.18.1
+        version: 0.18.1(encoding@0.1.13)
       '@x402/core':
         specifier: workspace:*
         version: link:../../core
@@ -650,12 +650,8 @@ packages:
   '@js-sdsl/ordered-map@4.4.2':
     resolution: {integrity: sha512-iUKgm52T8HOE/makSxjqoWhe95ZJA1/G1sYsGev2JDKUSS14KAgg1LHb+Ba+IPow0xflbnSkOsZcO08C7w1gYw==}
 
-  '@keetanetwork/anchor@0.0.50':
-    resolution: {integrity: sha512-m7NICKmbZPYPeAR5FfA0owo7Dblbp8JmjfQzSDRFpkUGtwqPl9LG6O4/FziuqlWnbTucntPUWDu661GZAoZUZg==}
-    engines: {node: 20.18.0}
-
-  '@keetanetwork/anchor@0.0.53':
-    resolution: {integrity: sha512-zaAZj0cuG3mMGxSjMmfFOYYxQmra74C8ErD7ZwWY+8SkOMTe4K9374m2mcpI15LUkNiHieWjGJTyk+9a8jwyig==}
+  '@keetanetwork/anchor@0.0.77':
+    resolution: {integrity: sha512-ca8LSoSLxdiEoI1vNF6HVlDXJdaUJvWcfU78RiT3+T/0//qPPHKEoQo6n4HJJAq4XgkY5sct2FZhTMnu1KDhlw==}
     engines: {node: 20.18.0}
 
   '@keetanetwork/asn1-napi-rs@1.2.2':
@@ -665,8 +661,8 @@ packages:
   '@keetanetwork/currency-info@1.2.5':
     resolution: {integrity: sha512-3IJz864AY46ng3Di84gSxqGV/DzzQzjJwOkm4BPefWkMYpA61/7411p5xCjzkFsC8mfR9ChXfI01m4xRgrKskw==}
 
-  '@keetanetwork/keetanet-client@0.16.1':
-    resolution: {integrity: sha512-SS31ZlQvz/qvcZf039K3COjSje3FiQOPBbhB0xAfn2Mwrc+QSqvM/FEi/3uWZdEWqeu4+cziUi1vMRReBUMGwA==}
+  '@keetanetwork/keetanet-client@0.18.1':
+    resolution: {integrity: sha512-ePGSqX9hHUWw2tsEgWeHukFDSck45B0GVJBpRqx18PYVGB/7XRXz6HVCmL+Oq9V2sC1MDx6Ttermq89nBZeIRQ==}
 
   '@noble/ciphers@1.3.0':
     resolution: {integrity: sha512-2I0gnIVPtfnMw9ee9h1dJG7tp81+8Ob3OJb3Mv37rx5L40/b0i7djjCVvGOVqc9AEIQyvyu1i6ypKdFw8R8gQw==}
@@ -2810,10 +2806,12 @@ packages:
 
   uuid@8.3.2:
     resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
+    deprecated: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
     hasBin: true
 
   uuid@9.0.1:
     resolution: {integrity: sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==}
+    deprecated: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
     hasBin: true
 
   valid-url@1.0.9:
@@ -3336,10 +3334,10 @@ snapshots:
   '@js-sdsl/ordered-map@4.4.2':
     optional: true
 
-  '@keetanetwork/anchor@0.0.50(@types/node@22.19.17)(encoding@0.1.13)(typescript@5.9.3)':
+  '@keetanetwork/anchor@0.0.77(@types/node@22.19.17)(encoding@0.1.13)(typescript@5.9.3)':
     dependencies:
       '@keetanetwork/currency-info': 1.2.5
-      '@keetanetwork/keetanet-client': 0.16.1(encoding@0.1.13)
+      '@keetanetwork/keetanet-client': 0.18.1(encoding@0.1.13)
       typia: 9.5.0(@types/node@22.19.17)(typescript@5.9.3)
     transitivePeerDependencies:
       - '@types/node'
@@ -3347,10 +3345,10 @@ snapshots:
       - supports-color
       - typescript
 
-  '@keetanetwork/anchor@0.0.50(@types/node@25.6.0)(encoding@0.1.13)(typescript@5.9.3)':
+  '@keetanetwork/anchor@0.0.77(@types/node@25.6.0)(encoding@0.1.13)(typescript@5.9.3)':
     dependencies:
       '@keetanetwork/currency-info': 1.2.5
-      '@keetanetwork/keetanet-client': 0.16.1(encoding@0.1.13)
+      '@keetanetwork/keetanet-client': 0.18.1(encoding@0.1.13)
       typia: 9.5.0(@types/node@25.6.0)(typescript@5.9.3)
     transitivePeerDependencies:
       - '@types/node'
@@ -3358,21 +3356,10 @@ snapshots:
       - supports-color
       - typescript
 
-  '@keetanetwork/anchor@0.0.50(@types/node@25.6.0)(typescript@5.9.3)':
+  '@keetanetwork/anchor@0.0.77(@types/node@25.6.0)(typescript@5.9.3)':
     dependencies:
       '@keetanetwork/currency-info': 1.2.5
-      '@keetanetwork/keetanet-client': 0.16.1(encoding@0.1.13)
-      typia: 9.5.0(@types/node@25.6.0)(typescript@5.9.3)
-    transitivePeerDependencies:
-      - '@types/node'
-      - encoding
-      - supports-color
-      - typescript
-
-  '@keetanetwork/anchor@0.0.53(@types/node@25.6.0)(encoding@0.1.13)(typescript@5.9.3)':
-    dependencies:
-      '@keetanetwork/currency-info': 1.2.5
-      '@keetanetwork/keetanet-client': 0.16.1(encoding@0.1.13)
+      '@keetanetwork/keetanet-client': 0.18.1(encoding@0.1.13)
       typia: 9.5.0(@types/node@25.6.0)(typescript@5.9.3)
     transitivePeerDependencies:
       - '@types/node'
@@ -3385,7 +3372,7 @@ snapshots:
 
   '@keetanetwork/currency-info@1.2.5': {}
 
-  '@keetanetwork/keetanet-client@0.16.1(encoding@0.1.13)':
+  '@keetanetwork/keetanet-client@0.18.1(encoding@0.1.13)':
     dependencies:
       secp256k1: 5.0.1
     optionalDependencies:
@@ -3826,8 +3813,8 @@ snapshots:
 
   '@x402/keeta@file:x402/typescript/packages/mechanisms/keeta(@types/node@25.6.0)(encoding@0.1.13)(typescript@5.9.3)':
     dependencies:
-      '@keetanetwork/anchor': 0.0.50(@types/node@25.6.0)(encoding@0.1.13)(typescript@5.9.3)
-      '@keetanetwork/keetanet-client': 0.16.1(encoding@0.1.13)
+      '@keetanetwork/anchor': 0.0.77(@types/node@25.6.0)(encoding@0.1.13)(typescript@5.9.3)
+      '@keetanetwork/keetanet-client': 0.18.1(encoding@0.1.13)
       '@x402/core': file:x402/typescript/packages/core
     transitivePeerDependencies:
       - '@types/node'
@@ -3837,8 +3824,8 @@ snapshots:
 
   '@x402/keeta@file:x402/typescript/packages/mechanisms/keeta(@types/node@25.6.0)(typescript@5.9.3)':
     dependencies:
-      '@keetanetwork/anchor': 0.0.50(@types/node@25.6.0)(typescript@5.9.3)
-      '@keetanetwork/keetanet-client': 0.16.1(encoding@0.1.13)
+      '@keetanetwork/anchor': 0.0.77(@types/node@25.6.0)(typescript@5.9.3)
+      '@keetanetwork/keetanet-client': 0.18.1(encoding@0.1.13)
       '@x402/core': file:x402/typescript/packages/core
     transitivePeerDependencies:
       - '@types/node'
