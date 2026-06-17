@@ -21,7 +21,7 @@ type LogTargetLevel = NonNullable<
 >;
 
 dotenv.config({
-  path: '../../.env'
+  path: "../../.env",
 });
 
 async function main() {
@@ -35,34 +35,45 @@ async function main() {
   logger.registerTarget(new LogTargetConsole({ logLevel }));
   logger.startAutoSync();
 
-  const account = KeetaNet.lib.Account.fromSeed(
-    await KeetaNet.lib.Account.seedFromPassphrase(
-      process.env.FACILITATOR_PASSPHRASE,
-    ),
-    0,
+  const amountAccounts = parseInt(
+    process.env.FACILITATOR_AMOUNT_ACCOUNTS ?? "1",
   );
 
+  logger.info("main", `Starting facilitator with ${amountAccounts} accounts`);
+  const accounts = [];
+  for (let i = 0; i < amountAccounts; i++) {
+    const account = KeetaNet.lib.Account.fromSeed(
+      await KeetaNet.lib.Account.seedFromPassphrase(
+        process.env.FACILITATOR_PASSPHRASE,
+      ),
+      i,
+    );
+    accounts.push(account);
+
+    logger.info("main", ` - ${account.publicKeyString.toString()}`);
+  }
+
   // Initialize the x402 Facilitator with Keeta support
-  const keetaSigner = toFacilitatorKeetaSigner([account]);
+  const keetaSigner = toFacilitatorKeetaSigner(accounts);
 
   const facilitator = new x402Facilitator()
     .onBeforeVerify(async (context) => {
-      logger.debug("Before verify", context);
+      logger.debug("facilitator", "Before verify", context);
     })
     .onAfterVerify(async (context) => {
-      logger.debug("After verify", context);
+      logger.debug("facilitator", "After verify", context);
     })
     .onVerifyFailure(async (context) => {
-      logger.error("Verify failure", context);
+      logger.error("facilitator", "Verify failure", context);
     })
     .onBeforeSettle(async (context) => {
-      logger.debug("Before settle", context);
+      logger.debug("facilitator", "Before settle", context);
     })
     .onAfterSettle(async (context) => {
-      logger.info("Transaction settled", context);
+      logger.info("facilitator", "Transaction settled", context);
     })
     .onSettleFailure(async (context) => {
-      logger.error("Settle failure", context);
+      logger.error("facilitator", "Settle failure", context);
     });
 
   facilitator.register(KEETA_TESTNET_CAIP2, new ExactKeetaScheme(keetaSigner));
@@ -155,7 +166,7 @@ async function main() {
   // Start the server
   const port = parseInt(process.env.PORT || "4022");
   const server = app.listen(port, () => {
-    logger.info(`Facilitator listening at http://localhost:${port}`);
+    logger.info("main", `Facilitator listening at http://localhost:${port}`);
   });
 
   const shutdown = async () => {
