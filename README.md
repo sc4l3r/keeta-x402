@@ -2,24 +2,12 @@
 
 An example of how to use the `@x402/keeta` library as a client, server, and facilitator.
 
-**Note**: The Keeta x402 integration is still work in progress.
-
 ## Requirements
 
-Since the Keeta x402 implementation is still work in progress, the `@x402/keeta` package is included as a git submodule.
-Clone the repo with submodules:
-
-```bash
-git clone https://github.com/sc4l3r/keeta-x402
-cd keeta-x402
-git submodule update --init
-```
-
-Then install the dependencies and build our x402 fork:
+Install the dependencies:
 
 ```bash
 pnpm install
-pnpm --filter @x402/keeta --filter @x402/core build
 ```
 
 Copy `.env.example` to `.env` and fill in the values.

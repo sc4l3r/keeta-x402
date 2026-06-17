@@ -3,7 +3,8 @@
 import * as dotenv from "dotenv";
 
 import * as KeetaNet from "@keetanetwork/keetanet-client";
-import { x402Client, x402HTTPClient } from "@x402/core/client";
+import { x402HTTPClient } from "@x402/core/http";
+import { x402Client } from "@x402/core/client";
 import { wrapFetchWithPayment } from "@x402/fetch";
 import { ExactKeetaScheme, KEETA_TESTNET_CAIP2, toClientKeetaSigner } from "@x402/keeta";
 
@@ -22,34 +23,30 @@ async function main() {
     0
   );
 
-  const clientKeetaSigner = toClientKeetaSigner(account);
+  await using clientKeetaSigner = toClientKeetaSigner(account);
 
   const client = new x402Client();
   client.register(KEETA_TESTNET_CAIP2, new ExactKeetaScheme(clientKeetaSigner));
 
   const fetchWithPayment = wrapFetchWithPayment(fetch, client);
+  const httpClient = new x402HTTPClient(client);
 
   const response = await fetchWithPayment("http://localhost:4021/weather", {
     method: "GET",
   });
 
-  const data = await response.json();
-  console.log("Response:", data);
+  const result = await httpClient.processResponse(response);
+  console.log("Response:", result.body);
 
   // Get payment receipt from response headers
-  if (response.ok) {
-    const httpClient = new x402HTTPClient(client);
-    const paymentResponse = httpClient.getPaymentSettleResponse(
-      (name) => response.headers.get(name)
-    );
-    console.log("Payment settled", paymentResponse);
+  if (result.paymentStatus === "settled") {
+    console.log("Payment settled:", result.header);
+  } else if (result.paymentStatus === "settle_failed") {
+    console.error("Settlement failed:", result.header);
   }
 }
 
 main()
-  .then(() => {
-    process.exit(0);
-  })
   .catch((error) => {
     console.error("Error in main function:", error);
     process.exit(1);

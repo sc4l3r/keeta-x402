@@ -17,11 +17,5 @@
     "type": "git",
     "url": "https://github.com/sc4l3r/keeta-x402"
   },
-  "packageManager": "pnpm@10.5.0",
-  "pnpm": {
-    "overrides": {
-      "@x402/keeta": "workspace:*",
-      "@x402/core": "workspace:*"
-    }
-  }
+  "packageManager": "pnpm@10.5.0"
 }
