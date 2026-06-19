@@ -3,22 +3,34 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "npx ts-node src/main.ts",
-    "build": "tsup src/main.ts --format esm --out-dir dist --target node22",
+    "dev": "concurrently \"tsx watch src/main.ts\" \"vite\"",
+    "build:server": "tsup src/main.ts --format esm --out-dir dist --target node22",
+    "build:web": "vite build",
+    "build": "pnpm build:server && pnpm build:web",
     "serve": "node dist/main.js"
   },
   "dependencies": {
     "@keetanetwork/anchor": "^0.0.77",
     "@keetanetwork/keetanet-client": "^0.18.1",
     "@x402/core": "^2.15.0",
+    "@x402/express": "2.15.0",
     "@x402/keeta": "^2.15.0",
     "dotenv": "^17.2.3",
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "preact": "^10.29.2",
+    "prismjs": "^1.30.0"
   },
   "devDependencies": {
+    "@preact/preset-vite": "^2.10.5",
+    "@tailwindcss/vite": "^4.3.1",
     "@types/express": "^5.0.6",
     "@types/node": "^25.0.0",
+    "@types/prismjs": "^1.26.6",
+    "concurrently": "^10.0.3",
+    "tailwindcss": "^4.3.1",
     "tsup": "^8.4.0",
-    "typescript": "^5.9.3"
+    "tsx": "^4.22.4",
+    "typescript": "^5.9.3",
+    "vite": "^6.2.6"
   }
 }

@@ -1,5 +1,6 @@
 node_modules/
 dist/
+apps/facilitator/public/
 .env
 .env.*
 !.env.example
