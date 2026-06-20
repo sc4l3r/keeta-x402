@@ -1,8 +1,17 @@
 # Keeta x402
 
-An implementation of the [x402 payment protocol](https://github.com/x402-foundation/x402)
-for [Keeta](https://keeta.com), with a production-ready facilitator and reference
-client/server apps.
+An implementation of the [x402 payment protocol](https://github.com/x402-foundation/x402) for [Keeta](https://keeta.com), with a production-ready facilitator and reference client/server apps.
+
+- **Instant Settlement**: The server settles the client's payment immediately, ensuring that they received the payment before returning the requested resource.
+- **Pay in any Keeta token**: Servers can take payments in any token on Keeta, be it KTA, USDC, memes, or even fiat tokens.
+- **Easy integration**: The reference implementation for x402 on Keeta is integrated into the [official x402 library](https://github.com/x402-foundation/x402/tree/main/typescript/packages/mechanisms/keeta) with support for Axios and fetch clients and a variety of server frameworks such as Express.js and Next.js.
+
+## Getting Started
+
+- For Buyers: See the [x402 Quickstart for Buyers](https://docs.x402.org/getting-started/quickstart-for-buyers#keeta) and the example client in [apps/client](apps/client/src/main.ts).
+- For Sellers: See the [x402 Quickstart for Sellers](https://docs.x402.org/getting-started/quickstart-for-sellers) and the example server in [apps/server](apps/server/src/main.ts).
+
+The facilitator implementation in this repository is hosted at <https://facilitator.x402.kee.tools/> and contains an interactive example to complete an x402 payment on Keeta.
 
 ## How x402 works on Keeta
 
@@ -16,7 +25,7 @@ client/server apps.
 The complete protocol is defined in the
 [x402 Keeta exact scheme specification](https://github.com/x402-foundation/x402/blob/main/specs/schemes/exact/scheme_exact_keeta.md).
 
-## Components
+## Components of this repository
 
 | Role                      | App                | Key env vars                                                         |
 | ------------------------- | ------------------ | -------------------------------------------------------------------- |
