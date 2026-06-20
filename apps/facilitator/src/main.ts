@@ -29,7 +29,14 @@ async function main() {
     config.amountAccounts,
     logger,
   );
-  const facilitator = buildFacilitator(accounts, config.enabledNetworks, logger);
+
+  const { facilitator, pools } = await buildFacilitator(
+    accounts,
+    config.enabledNetworks,
+    config,
+    logger,
+  );
+
   const app = buildApp(config, accounts, facilitator, logger);
 
   const server = app.listen(config.port, () => {
@@ -38,6 +45,12 @@ async function main() {
 
   const shutdown = async () => {
     logger.info("main", "Shutting down...");
+
+    // Stop all fee-payer pool poll loops before exiting.
+    for (const pool of pools) {
+      pool.stop();
+    }
+
     logger.stopAutoSync();
     await logger.sync();
     server.close(() => process.exit(0));
