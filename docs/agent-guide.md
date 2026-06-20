@@ -53,7 +53,7 @@ const response = await fetchWithPayment("https://your-server.example/weather");
 const data = await response.json();
 ```
 
-A complete example is available at [apps/client/src/main.ts](,,/apps/client/src/main.ts).
+A complete example is available at [apps/client/src/main.ts](../apps/client/src/main.ts).
 
 > [!NOTE]
 > When making a payment, the client creates and signs a block but **doesn't publish it**.
