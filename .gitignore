@@ -5,3 +5,4 @@ apps/facilitator/public/
 .env.*
 !.env.example
 .pnpm-store/
+deployment/Pulumi.*.yaml
