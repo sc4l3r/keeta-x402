@@ -1,10 +1,10 @@
 {
   "name": "keeta-x402",
   "version": "0.1.0",
-  "description": "Example of how to use x402 with Keeta",
+  "description": "Client and server examples for x402 on Keeta and production-ready facilitator implementation",
   "type": "module",
   "scripts": {
-    "facilitator": "pnpm --filter facilitator start",
+    "facilitator": "pnpm --filter facilitator dev",
     "resource-server": "pnpm --filter server start",
     "client": "pnpm --filter client start",
     "build": "pnpm --filter facilitator build && pnpm --filter server build",
@@ -12,7 +12,7 @@
   },
   "keywords": [],
   "author": "sc4l3r",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/sc4l3r/keeta-x402"

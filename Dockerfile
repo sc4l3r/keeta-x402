@@ -8,10 +8,8 @@ WORKDIR /app
 # Build shared packages
 COPY . .
 RUN pnpm install --frozen-lockfile
-RUN pnpm --filter @x402/core build
-RUN pnpm --filter @x402/keeta build
 
-# Build facilitator
+# Build facilitator (Node.js server + Vite dashboard)
 FROM base-builder AS facilitator-builder
 RUN pnpm --filter facilitator build
 RUN pnpm deploy --filter facilitator --prod /prod
@@ -28,6 +26,8 @@ WORKDIR /app
 
 COPY --from=facilitator-builder /prod/node_modules/ ./node_modules/
 COPY --from=facilitator-builder /app/apps/facilitator/dist/ ./dist/
+# Dashboard static files served by Express at /
+COPY --from=facilitator-builder /app/apps/facilitator/public/ ./public/
 
 ENV NODE_ENV=production
 

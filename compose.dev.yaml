@@ -1,0 +1,24 @@
+services:
+  facilitator:
+    build:
+      context: .
+      target: facilitator
+    env_file:
+      - .env
+    ports:
+      - "${PORT:-4022}:${PORT:-4022}"
+    restart: unless-stopped
+
+  server:
+    build:
+      context: .
+      target: server
+    environment:
+      FACILITATOR_URL: "http://facilitator:${PORT:-4022}"
+    env_file:
+      - .env
+    ports:
+      - "${SERVER_PORT:-4021}:${SERVER_PORT:-4021}"
+    depends_on:
+      - facilitator
+    restart: unless-stopped

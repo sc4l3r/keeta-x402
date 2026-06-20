@@ -1,0 +1,36 @@
+# x402 Facilitator for Keeta
+
+This facilitator implements the x402 payment protocol for the Keeta network.
+It verifies and settles payment blocks on behalf of resource servers.
+
+## Resources
+
+- GitHub repo: https://github.com/sc4l3r/keeta-x402
+- Agent integration guide: https://raw.githubusercontent.com/sc4l3r/keeta-x402/main/docs/agent-guide.md
+- x402 Keeta scheme spec: https://raw.githubusercontent.com/x402-foundation/x402/main/specs/schemes/exact/scheme_exact_keeta.md
+- npm package: https://www.npmjs.com/package/@x402/keeta
+- Example client: https://github.com/sc4l3r/keeta-x402/blob/main/apps/client/src/main.ts
+- Example resource server: https://github.com/sc4l3r/keeta-x402/blob/main/apps/server/src/main.ts
+
+## x402 Endpoints
+
+The x402 API endpoints are served at the root:
+
+POST /verify    - verify a payment payload
+POST /settle    - settle a verified payment
+GET  /supported - list supported payment schemes and facilitator accounts
+
+To configure an x402 HTTP facilitator client use the base URL of this server as:
+
+```typescript
+import { HTTPFacilitatorClient } from "@x402/core/server";
+
+const facilitatorClient = new HTTPFacilitatorClient({
+  url: "https://<this-server-base-url>",
+});
+```
+
+## Quick start
+
+Install: npm install @x402/keeta @x402/core
+See the agent guide (link above) for a complete example.
