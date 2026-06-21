@@ -47,6 +47,15 @@ const facilitatorArgs: gcpComponents.apps.CloudRunServiceArgs = {
   service: {
     cpuLimit: 1,
     memoryLimit: 512,
+    // Cap the facilitator to a single instance. It owns its fee-payer accounts
+    // (all instances derive the same accounts from FACILITATOR_PASSPHRASE) and
+    // serializes settlements per account via an in-memory queue. A second
+    // instance would let two processes submit blocks sponsored by the same fee
+    // payer concurrently, racing on that account's chain head (the loser fails
+    // with a previous/head mismatch).
+    annotations: {
+      "autoscaling.knative.dev/maxScale": "1",
+    },
   },
 };
 
