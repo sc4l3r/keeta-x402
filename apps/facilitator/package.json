@@ -10,7 +10,7 @@
     "serve": "node dist/main.js"
   },
   "dependencies": {
-    "@keetanetwork/anchor": "^0.0.77",
+    "@keetanetwork/anchor": "^0.0.78",
     "@keetanetwork/keetanet-client": "^0.18.1",
     "@x402/core": "^2.16.0",
     "@x402/express": "2.16.0",
