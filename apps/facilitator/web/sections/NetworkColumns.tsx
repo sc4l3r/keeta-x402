@@ -1,13 +1,15 @@
 import { KEETA_TESTNET_CAIP2 } from "@x402/keeta";
+import { AlertTriangle, CircleX } from "lucide-preact";
 import {
   formatRawAmount,
   formatHeight,
   shortAddr,
   networkLabel,
+  classifyHealth,
 } from "../lib/utils.js";
 import { DEFAULT_SYMBOL } from "../lib/constants.js";
 import { SkeletonNetPanel, StaleBadge } from "../components/Skeleton.js";
-import type { NetworkState } from "../lib/types.js";
+import type { AccountHealth, NetworkState, Thresholds } from "../lib/types.js";
 
 function explorerUrl(caip2: string, address: string): string {
   const base =
@@ -17,10 +19,34 @@ function explorerUrl(caip2: string, address: string): string {
   return `${base}/account/${address}`;
 }
 
+// Inline icon shown only for non-healthy accounts
+type HealthIcon = { Icon: typeof AlertTriangle; cls: string };
+const HEALTH_ICON: Partial<Record<AccountHealth, HealthIcon>> = {
+  degraded: { Icon: AlertTriangle, cls: "text-warn" },
+  disabled: { Icon: CircleX, cls: "text-bad" },
+};
+
+function healthTitle(health: AccountHealth): string {
+  switch (health) {
+    case "healthy":
+      return "Funded: settling payments";
+    case "degraded":
+      return "Low balance: needs a top-up soon";
+    case "disabled":
+      return "Below minimum: excluded from settling until topped up";
+  }
+}
+
 const thCls = "px-4 py-2 text-xs font-medium text-ink-dim border-b border-edge";
 const tdCls = "py-[0.55rem] px-4 align-middle";
 
-export function NetworkColumns({ states }: { states: NetworkState[] }) {
+export function NetworkColumns({
+  states,
+  thresholds,
+}: {
+  states: NetworkState[];
+  thresholds: Thresholds | null;
+}) {
   if (states.length === 0) {
     return (
       <div class="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4">
@@ -64,6 +90,7 @@ export function NetworkColumns({ states }: { states: NetworkState[] }) {
                 <tbody>
                   {rows.map((row, i) => {
                     const ok = !row.error && row.ktaRaw !== null;
+                    const health = classifyHealth(row.ktaRaw, dec, thresholds);
                     return (
                       <tr
                         key={row.address}
@@ -71,16 +98,27 @@ export function NetworkColumns({ states }: { states: NetworkState[] }) {
                       >
                         <td
                           class={`${tdCls} font-mono text-xs text-ink-2 break-all`}
-                          title={row.address}
                         >
-                          <a
-                            href={explorerUrl(network.caip2, row.address)}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="text-inherit no-underline hover:text-ink hover:underline"
-                          >
-                            {shortAddr(row.address)}
-                          </a>
+                          <span class="inline-flex items-center gap-1.5">
+                            <a
+                              href={explorerUrl(network.caip2, row.address)}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              title={row.address}
+                              class="text-inherit no-underline hover:text-ink hover:underline"
+                            >
+                              {shortAddr(row.address)}
+                            </a>
+                            {health && HEALTH_ICON[health] && (() => {
+                              const { Icon, cls } = HEALTH_ICON[health]!;
+                              const tip = healthTitle(health);
+                              return (
+                                <span title={tip} aria-label={tip} class="flex items-center">
+                                  <Icon size={12} class={cls} strokeWidth={2.5} />
+                                </span>
+                              );
+                            })()}
+                          </span>
                         </td>
                         <td class={`${tdCls} text-right text-ink tabular-nums`}>
                           {ok && dec !== null ? (

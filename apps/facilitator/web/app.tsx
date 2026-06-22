@@ -4,7 +4,11 @@ import { StatCards } from "./sections/StatCards.js";
 import { NetworkColumns } from "./sections/NetworkColumns.js";
 import { DemoSection } from "./sections/DemoSection.js";
 import { TsBlock } from "./components/Highlight.js";
-import type { AccountsResponse, NetworkState } from "./lib/types.js";
+import type {
+  AccountsResponse,
+  NetworkState,
+  Thresholds,
+} from "./lib/types.js";
 
 const REFRESH_MS = 30_000;
 
@@ -13,6 +17,7 @@ const linkCls =
 
 export function App() {
   const [states, setStates] = useState<NetworkState[]>([]);
+  const [thresholds, setThresholds] = useState<Thresholds | null>(null);
   const [statusMsg, setStatusMsg] = useState("Loading...");
   const [statusErr, setStatusErr] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
@@ -41,6 +46,7 @@ export function App() {
         setRefreshing(false);
         return;
       }
+      setThresholds(data.thresholds ?? null);
       await refresh(data);
       id = setInterval(() => refresh(data), REFRESH_MS);
     }
@@ -141,7 +147,7 @@ export function App() {
           This facilitator uses the following pool of Keeta accounts to settle
           transactions and pay network fees.
         </p>
-        <NetworkColumns states={states} />
+        <NetworkColumns states={states} thresholds={thresholds} />
       </div>
 
       <div class="mt-5">

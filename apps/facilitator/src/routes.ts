@@ -10,20 +10,22 @@ import type {
 } from "@x402/core/types";
 import type { NetworkIDs } from "./config.js";
 import { getBaseTokenInfo } from "./token.js";
+import { requestFaucet } from "./faucet.js";
 
 export function mountRoutes(
   app: Express,
   facilitator: InstanceType<typeof x402Facilitator>,
   accounts: InstanceType<typeof KeetaNet.lib.Account>[],
   enabledNetworks: NetworkIDs[],
+  thresholds: { minBalanceKta: string; refillThresholdKta: string },
   logger: InstanceType<typeof Logger>,
 ): void {
   app.get("/healthz", (_req, res) => {
     res.json({ status: "ok" });
   });
 
-  // Returns fee-payer accounts, enabled networks, and per-network base token
-  // metadata so the dashboard formats amounts correctly.
+  // Returns fee-payer accounts, enabled networks, per-network base token
+  // metadata, and the global KTA balance thresholds.
   app.get("/accounts", async (_req, res) => {
     const networksWithMeta = await Promise.all(
       enabledNetworks.map(async (n) => {
@@ -52,6 +54,7 @@ export function mountRoutes(
     res.json({
       networks: networksWithMeta,
       accounts: accounts.map((a) => a.publicKeyString.toString()),
+      thresholds,
     });
   });
 
@@ -122,20 +125,9 @@ export function mountRoutes(
     if (!address || typeof address !== "string") {
       return res.status(400).json({ error: "address required" });
     }
-    const params = new URLSearchParams();
-    params.append("address", address);
-    params.append("amount", "1");
     try {
-      const resp = await fetch("https://faucet.test.keeta.com", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: params.toString(),
-      });
-      if (resp.ok) {
-        res.json({ success: true });
-      } else {
-        res.status(502).json({ error: `Faucet returned ${resp.status}` });
-      }
+      await requestFaucet(address, "1");
+      res.json({ success: true });
     } catch (err) {
       logger.error("routes", "Faucet proxy error", err);
       res.status(502).json({

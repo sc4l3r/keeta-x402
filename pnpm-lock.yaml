@@ -57,6 +57,9 @@ importers:
       express:
         specifier: ^5.2.1
         version: 5.2.1
+      lucide-preact:
+        specifier: ^1.21.0
+        version: 1.21.0(preact@10.29.2)
       preact:
         specifier: ^10.29.2
         version: 10.29.2
@@ -2747,6 +2750,11 @@ packages:
 
   lru-cache@5.1.1:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
+
+  lucide-preact@1.21.0:
+    resolution: {integrity: sha512-GUJs/vYSHNM5HU0UwNADfKvDbNDQ7i6vciniCvtpRVMsXy+FOcaRHgRhqVcY/CiORqA6oMC8xK5JJ7Wvb1r1Sw==}
+    peerDependencies:
+      preact: ^10.27.2
 
   magic-string@0.30.21:
     resolution: {integrity: sha512-vd2F4YUyEXKGcLHoq+TEyCjxueSeHnFxyyjNp80yg0XV4vUhnDer/lvvlqM/arB5bXQN5K2/3oinyCRyx8T2CQ==}
@@ -6806,6 +6814,10 @@ snapshots:
   lru-cache@5.1.1:
     dependencies:
       yallist: 3.1.1
+
+  lucide-preact@1.21.0(preact@10.29.2):
+    dependencies:
+      preact: 10.29.2
 
   magic-string@0.30.21:
     dependencies:
