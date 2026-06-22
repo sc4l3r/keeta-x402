@@ -24,3 +24,34 @@ export function networkLabel(network: string): string {
   if (network === "main") return "Mainnet";
   return network;
 }
+
+export function ktaToRaw(kta: string, decimals: number): bigint | null {
+  const [intPart = "", fracPart = ""] = kta.split(".");
+  if (fracPart.length > decimals) return null;
+  try {
+    const paddedFrac = fracPart.padEnd(decimals, "0");
+    return (
+      BigInt(intPart || "0") * 10n ** BigInt(decimals) +
+      BigInt(paddedFrac || "0")
+    );
+  } catch {
+    return null;
+  }
+}
+
+export function classifyHealth(
+  ktaRaw: bigint | null,
+  decimals: number | null,
+  thresholds: { minBalanceKta: string; refillThresholdKta: string } | null,
+): "healthy" | "degraded" | "disabled" | null {
+  if (ktaRaw === null || decimals === null || !thresholds) return null;
+
+  const min = ktaToRaw(thresholds.minBalanceKta, decimals);
+  const refill = ktaToRaw(thresholds.refillThresholdKta, decimals);
+
+  if (min === null || refill === null) return null;
+
+  if (ktaRaw >= refill) return "healthy";
+  if (ktaRaw >= min) return "degraded";
+  return "disabled";
+}

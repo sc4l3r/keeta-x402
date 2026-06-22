@@ -20,7 +20,17 @@ export function buildApp(
   app.disable("x-powered-by");
   app.use(express.json());
 
-  mountRoutes(app, facilitator, accounts, config.enabledNetworks, logger);
+  mountRoutes(
+    app,
+    facilitator,
+    accounts,
+    config.enabledNetworks,
+    {
+      minBalanceKta: config.minFeeBalanceKta,
+      refillThresholdKta: config.refillThresholdKta,
+    },
+    logger,
+  );
   mountDemoServer(
     app,
     config.enabledNetworks,

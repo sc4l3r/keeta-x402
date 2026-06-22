@@ -17,14 +17,15 @@ export function mountRoutes(
   facilitator: InstanceType<typeof x402Facilitator>,
   accounts: InstanceType<typeof KeetaNet.lib.Account>[],
   enabledNetworks: NetworkIDs[],
+  thresholds: { minBalanceKta: string; refillThresholdKta: string },
   logger: InstanceType<typeof Logger>,
 ): void {
   app.get("/healthz", (_req, res) => {
     res.json({ status: "ok" });
   });
 
-  // Returns fee-payer accounts, enabled networks, and per-network base token
-  // metadata so the dashboard formats amounts correctly.
+  // Returns fee-payer accounts, enabled networks, per-network base token
+  // metadata, and the global KTA balance thresholds.
   app.get("/accounts", async (_req, res) => {
     const networksWithMeta = await Promise.all(
       enabledNetworks.map(async (n) => {
@@ -53,6 +54,7 @@ export function mountRoutes(
     res.json({
       networks: networksWithMeta,
       accounts: accounts.map((a) => a.publicKeyString.toString()),
+      thresholds,
     });
   });
 

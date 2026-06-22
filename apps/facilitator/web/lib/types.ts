@@ -6,9 +6,17 @@ export type NetworkInfo = {
   decimals: number | null;
 };
 
+export type Thresholds = {
+  minBalanceKta: string;
+  refillThresholdKta: string;
+};
+
+export type AccountHealth = "healthy" | "degraded" | "disabled";
+
 export type AccountsResponse = {
   networks: NetworkInfo[];
   accounts: string[];
+  thresholds: Thresholds;
 };
 
 export type RowData = {
