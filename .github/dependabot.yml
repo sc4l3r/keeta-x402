@@ -4,6 +4,10 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+    groups:
+      x402:
+        patterns:
+          - "@x402/*"
 
   - package-ecosystem: "docker"
     directory: "/"
