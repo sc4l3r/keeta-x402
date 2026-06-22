@@ -1,6 +1,6 @@
 services:
   facilitator:
-    image: ghcr.io/sc4l3r/keeta-x402-facilitator:latest
+    image: ghcr.io/sc4l3r/keeta-x402/facilitator:latest
     env_file:
       - .env
     ports:
