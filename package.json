@@ -7,7 +7,7 @@
     "facilitator": "pnpm --filter facilitator dev",
     "resource-server": "pnpm --filter server start",
     "client": "pnpm --filter client start",
-    "build": "pnpm --filter facilitator build && pnpm --filter server build && pnpm --filter client build",
+    "build": "pnpm --filter facilitator build && pnpm --filter server build",
     "typecheck": "pnpm -r exec tsc --noEmit"
   },
   "keywords": [],
@@ -17,5 +17,5 @@
     "type": "git",
     "url": "https://github.com/sc4l3r/keeta-x402"
   },
-  "packageManager": "pnpm@10.5.0"
+  "packageManager": "pnpm@11.8.0"
 }
