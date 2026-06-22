@@ -2,6 +2,8 @@ import { defineConfig } from "vite";
 import preact from "@preact/preset-vite";
 import tailwindcss from "@tailwindcss/vite";
 
+const FACILITATOR_LOCAL_HOST = "http://localhost:4022";
+
 export default defineConfig({
   root: "web",
   plugins: [preact(), tailwindcss()],
@@ -15,13 +17,14 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      "/accounts": "http://localhost:4022",
-      "/healthz": "http://localhost:4022",
-      "/supported": "http://localhost:4022",
-      "/verify": "http://localhost:4022",
-      "/settle": "http://localhost:4022",
-      "/weather": "http://localhost:4022",
-      "/faucet": "http://localhost:4022",
+      "/accounts": FACILITATOR_LOCAL_HOST,
+      "/healthz": FACILITATOR_LOCAL_HOST,
+      "/supported": FACILITATOR_LOCAL_HOST,
+      "/verify": FACILITATOR_LOCAL_HOST,
+      "/settle": FACILITATOR_LOCAL_HOST,
+      "/weather": FACILITATOR_LOCAL_HOST,
+      "/faucet": FACILITATOR_LOCAL_HOST,
+      "/metrics": FACILITATOR_LOCAL_HOST,
     },
   },
 });

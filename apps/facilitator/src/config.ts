@@ -69,6 +69,15 @@ export type AppConfig = {
    * How often (ms) to poll all fee-payer accounts' balances.
    */
   pollIntervalMs: number;
+  /**
+   * Whether the /metrics Prometheus scrape endpoint is enabled.
+   */
+  metricsEnabled: boolean;
+  /**
+   * If set, the /metrics endpoint requires an `Authorization: Bearer <token>`
+   * header matching this value.
+   */
+  metricsToken: string | undefined;
 };
 
 /**
@@ -190,6 +199,10 @@ export function loadConfig(): AppConfig {
     process.exit(1);
   }
 
+  const metricsEnabled = process.env.FACILITATOR_METRICS_ENABLED === "true";
+  const rawMetricsToken = process.env.FACILITATOR_METRICS_TOKEN;
+  const metricsToken = rawMetricsToken?.trim() || undefined;
+
   const testnetEnabled = enabledNetworks.some((n) => n.network === "test");
   const serverAddress = process.env.SERVER_ADDRESS;
   if (testnetEnabled && !serverAddress) {
@@ -210,5 +223,7 @@ export function loadConfig(): AppConfig {
     refillThresholdKta: rawRefillThresholdKta,
     refillTargetKta: rawRefillTargetKta,
     pollIntervalMs,
+    metricsEnabled,
+    metricsToken,
   };
 }

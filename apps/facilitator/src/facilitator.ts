@@ -7,6 +7,7 @@ import type { AppConfig, NetworkIDs } from "./config.js";
 import { ktaToRaw } from "./config.js";
 import { faucetRefiller, FeePayerPool } from "./fee-payer-pool.js";
 import { getBaseTokenInfo } from "./token.ts";
+import { InstrumentedSettlementQueue } from "./instrumented-queue.js";
 
 /** Resources that must be cleaned up on process shutdown. */
 export type FacilitatorResources = {
@@ -90,7 +91,8 @@ export async function buildFacilitator(
 
     // Filter fee-payer selection through the pool to only use healthy accounts for settlement
     const filteredSigner = pool.getBalanceFilteredSigner();
-    const scheme = new ExactKeetaScheme(filteredSigner, logger);
+    const queue = new InstrumentedSettlementQueue(filteredSigner, logger);
+    const scheme = new ExactKeetaScheme(filteredSigner, logger, queue);
 
     // Start polling after the scheme (and its queue) are built, so the queue's
     // eager per-account runner creation sees the optimistic all-healthy state.

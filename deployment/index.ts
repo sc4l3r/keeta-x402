@@ -40,7 +40,12 @@ const facilitatorArgs: gcpComponents.apps.CloudRunServiceArgs = {
       value: config.requireSecret("facilitatorPassphrase"),
       secret: true,
     },
-    FACILITATOR_AMOUNT_ACCOUNTS: 4,
+    FACILITATOR_AMOUNT_ACCOUNTS: config.getNumber("facilitatorAmountAccounts") ?? 4,
+    FACILITATOR_METRICS_ENABLED: config.get("facilitatorMetricsEnabled") ?? "",
+    FACILITATOR_METRICS_TOKEN: {
+      value: config.getSecret("facilitatorMetricsToken") ?? "",
+      secret: true,
+    },
     SERVER_ADDRESS: config.require("serverAddress"),
   },
 
