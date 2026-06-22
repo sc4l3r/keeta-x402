@@ -15,8 +15,8 @@ importers:
         specifier: ^0.18.1
         version: 0.18.1(encoding@0.1.13)
       '@x402/core':
-        specifier: ^2.15.0
-        version: 2.15.0
+        specifier: ^2.16.0
+        version: 2.16.0
       '@x402/fetch':
         specifier: 2.15.0
         version: 2.15.0
@@ -43,8 +43,8 @@ importers:
         specifier: ^0.18.1
         version: 0.18.1(encoding@0.1.13)
       '@x402/core':
-        specifier: ^2.15.0
-        version: 2.15.0
+        specifier: ^2.16.0
+        version: 2.16.0
       '@x402/express':
         specifier: 2.15.0
         version: 2.15.0(ethers@6.16.0)(express@5.2.1)(typescript@5.9.3)
@@ -104,8 +104,8 @@ importers:
   apps/server:
     dependencies:
       '@x402/core':
-        specifier: ^2.15.0
-        version: 2.15.0
+        specifier: ^2.16.0
+        version: 2.16.0
       '@x402/express':
         specifier: 2.15.0
         version: 2.15.0(ethers@6.16.0)(express@5.2.1)(typescript@5.9.3)
@@ -1638,6 +1638,9 @@ packages:
 
   '@x402/core@2.15.0':
     resolution: {integrity: sha512-Hwop1cu80sf3H4dpNdiMJt7ay30Jf7JUjgx7dXHxQm/nYqOjTcm71FC/ZhpnIpeg6RSAUt7EI/rFTXx/lafHhw==}
+
+  '@x402/core@2.16.0':
+    resolution: {integrity: sha512-7MjwOEiE6ICAYtOsK9vQl66Ho4jERDuuoRg/No2Nc2GQ7y/M/yu4DJ65LzeBycQE+Qrg2RqQG7KR51tyT+hzjQ==}
 
   '@x402/express@2.15.0':
     resolution: {integrity: sha512-xtAwXKpbf3nMvLq7cwyowFmzQdmrg1oFAql9+RukjzXmzyPKQD8Fd4+elOus4sz24f7wK6dDXYZNNhBEzBVrBw==}
@@ -5535,6 +5538,10 @@ snapshots:
     dependencies:
       zod: 3.25.76
 
+  '@x402/core@2.16.0':
+    dependencies:
+      zod: 3.25.76
+
   '@x402/express@2.15.0(ethers@6.16.0)(express@5.2.1)(typescript@5.9.3)':
     dependencies:
       '@x402/core': 2.15.0
@@ -5571,7 +5578,7 @@ snapshots:
     dependencies:
       '@keetanetwork/anchor': 0.0.77(@types/node@25.6.0)(encoding@0.1.13)(typescript@5.9.3)
       '@keetanetwork/keetanet-client': 0.18.1(encoding@0.1.13)
-      '@x402/core': 2.15.0
+      '@x402/core': 2.16.0
     transitivePeerDependencies:
       - '@types/node'
       - encoding
