@@ -1,5 +1,5 @@
 # Base for all services
-FROM node:22-slim AS base-builder
+FROM node:26-slim AS base-builder
 
 RUN corepack enable
 
