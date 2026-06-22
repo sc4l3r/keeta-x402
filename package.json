@@ -7,7 +7,7 @@
     "facilitator": "pnpm --filter facilitator dev",
     "resource-server": "pnpm --filter server start",
     "client": "pnpm --filter client start",
-    "build": "pnpm --filter facilitator build && pnpm --filter server build",
+    "build": "pnpm --filter facilitator build && pnpm --filter server build && pnpm --filter client build",
     "typecheck": "pnpm -r exec tsc --noEmit"
   },
   "keywords": [],
