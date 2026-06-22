@@ -17,5 +17,8 @@
     "type": "git",
     "url": "https://github.com/sc4l3r/keeta-x402"
   },
+  "devDependencies": {
+    "@types/node": "^22.0.0"
+  },
   "packageManager": "pnpm@11.8.0"
 }
