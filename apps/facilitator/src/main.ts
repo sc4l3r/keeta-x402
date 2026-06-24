@@ -37,7 +37,7 @@ async function main() {
     logger,
   );
 
-  const app = buildApp(config, accounts, facilitator, logger);
+  const app = buildApp(config, accounts, facilitator, pools, logger);
 
   const server = app.listen(config.port, () => {
     logger.info("main", `Facilitator listening at http://localhost:${config.port}`);

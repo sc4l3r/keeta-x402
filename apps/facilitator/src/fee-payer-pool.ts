@@ -38,6 +38,14 @@ type FeePayerState = {
   refilling: boolean;
 };
 
+/**
+ * A point-in-time summary of the pool's health, suitable for exporting as
+ * metrics.
+ */
+export type FeePayerHealthSnapshot = {
+  health: Record<FeePayerHealth, number>;
+};
+
 type FeePayerPoolOptions = {
   /**
    * Minimum base-token balance (in raw units) below which an account is
@@ -194,6 +202,61 @@ export class FeePayerPool {
       if (s.health !== "unhealthy") schedulable.push(addr);
     }
     return schedulable;
+  }
+
+  /** The network this pool manages fee payers for. */
+  get networkId(): NetworkIDs {
+    return this.network;
+  }
+
+  /**
+   * Fetch the current account info for every account in the pool.
+   *
+   * @returns An account info in insertion order, where
+   *   `balance` is in raw atomic units.
+   */
+  async fetchAccountsInfo(): Promise<
+    { address: string; balance: bigint; blockHeight: bigint }[]
+  > {
+    const addresses = Array.from(this.state.keys());
+    if (addresses.length === 0) return [];
+
+    // Any address works
+    const userClient = this.signer.getKeetaUserClient(
+      addresses[0]!,
+      this.network.caip2,
+    );
+    const baseToken = userClient.baseToken;
+    const client = userClient.client;
+
+    const infosMap = await client.getAccountsInfo(addresses);
+    return addresses.map((address) => {
+      const info = infosMap[address];
+      const entry = info?.balances.find((b) => b.token.comparePublicKey(baseToken));
+      return {
+        address,
+        balance: entry?.balance ?? 0n,
+        blockHeight: BigInt(info?.currentHeadBlockHeight ?? "0"),
+      };
+    });
+  }
+
+  /**
+   * Produce a point-in-time {@link FeePayerHealthSnapshot} of the pool's account
+   * states, for export as metrics.
+   *
+   * @returns Per-health-state account counts and the count currently refilling.
+   */
+  getHealthSnapshot(): FeePayerHealthSnapshot {
+    const health: Record<FeePayerHealth, number> = {
+      healthy: 0,
+      degraded: 0,
+      unhealthy: 0,
+    };
+    for (const s of this.state.values()) {
+      health[s.health] += 1;
+    }
+    return { health };
   }
 
   /**

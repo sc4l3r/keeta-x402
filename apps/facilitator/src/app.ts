@@ -7,6 +7,12 @@ import * as KeetaNet from "@keetanetwork/keetanet-client";
 import type { AppConfig } from "./config.js";
 import { mountRoutes } from "./routes.js";
 import { mountDemoServer } from "./demo-server.js";
+import type { FeePayerPool } from "./fee-payer-pool.js";
+import {
+  metricsMiddleware,
+  registerPoolHealthCollection,
+  setMetricsEnabled,
+} from "./metrics.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -14,11 +20,21 @@ export function buildApp(
   config: AppConfig,
   accounts: InstanceType<typeof KeetaNet.lib.Account>[],
   facilitator: InstanceType<typeof x402Facilitator>,
+  pools: FeePayerPool[],
   logger: InstanceType<typeof Logger>,
 ): express.Express {
   const app = express();
   app.disable("x-powered-by");
   app.use(express.json());
+
+  setMetricsEnabled(config.metricsEnabled);
+
+  // Record HTTP metrics for every request.
+  // Mount before routes so unmatched requests are captured too.
+  if (config.metricsEnabled) {
+    app.use(metricsMiddleware());
+    registerPoolHealthCollection(pools);
+  }
 
   mountRoutes(
     app,
@@ -30,6 +46,7 @@ export function buildApp(
       refillThresholdKta: config.refillThresholdKta,
     },
     logger,
+    { enabled: config.metricsEnabled, token: config.metricsToken },
   );
   mountDemoServer(
     app,
