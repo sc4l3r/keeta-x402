@@ -1,0 +1,4 @@
+Contact: https://github.com/sc4l3r/keeta-x402/security/advisories/new
+Expires: 2027-06-23T00:00:00.000Z
+Acknowledgments: https://github.com/sc4l3r/keeta-x402/security/advisories
+Preferred-Languages: en

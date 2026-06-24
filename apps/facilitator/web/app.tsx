@@ -177,23 +177,42 @@ export function App() {
         />
       )}
 
-      <footer class="mt-4 text-ink-dim text-right">
-        Built in collaboration with{" "}
-        <a
-          href="https://keeta.com"
-          target="_blank"
-          class="text-accent no-underline hover:underline"
-        >
-          Keeta
-        </a>{" "}
-        by{" "}
-        <a
-          href="https://github.com/sc4l3r"
-          target="_blank"
-          class="text-accent no-underline hover:underline"
-        >
-          Scaler
-        </a>
+      <footer class="mt-4 text-ink-dim flex flex-col justify-around gap-2 px-4 md:flex-row md:justify-between">
+        <div class="w-fit mx-auto md:mx-0">
+          Found a bug? Report an{" "}
+          <a
+            href="https://github.com/sc4l3r/keeta-x402/issues"
+            target="_blank"
+            class="text-accent no-underline hover:underline"
+          >
+            issue
+          </a>{" "}
+          or a{" "}
+          <a
+            href="https://github.com/sc4l3r/keeta-x402/security"
+            class="text-accent no-underline hover:underline"
+          >
+            vulnerability
+          </a>
+        </div>
+        <div class="w-fit mx-auto md:mx-0">
+          Built in collaboration with{" "}
+          <a
+            href="https://keeta.com"
+            target="_blank"
+            class="text-accent no-underline hover:underline"
+          >
+            Keeta
+          </a>{" "}
+          by{" "}
+          <a
+            href="https://github.com/sc4l3r"
+            target="_blank"
+            class="text-accent no-underline hover:underline"
+          >
+            Scaler
+          </a>
+        </div>
       </footer>
     </>
   );
