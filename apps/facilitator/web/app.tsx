@@ -177,7 +177,25 @@ export function App() {
         />
       )}
 
-      <footer class="mt-4 text-ink-dim flex flex-col justify-around gap-2 px-4 md:flex-row md:justify-between">
+      <div class="mt-5 pt-5 border-t border-edge text-ink-dim text-xs leading-[1.65]">
+        <p class="font-semibold uppercase tracking-[0.06em] mb-2">
+          Third-Party Service Notice
+        </p>
+        <p class="text-justify">
+          This service is developed, operated, and maintained by an
+          independent third party as part of the Keeta Grant Program.
+          Although this service is accessible through a Keeta-owned
+          subdomain, it is not operated by Keeta, Inc. The use of a Keeta
+          subdomain does not constitute an endorsement of the service or its
+          operator. Keeta does not control or assume responsibility for the
+          service's operation, availability, content, security, or
+          compliance. Your use of this service is at your own risk and is
+          subject to the terms and privacy policy provided by the third-party
+          operator, where applicable.
+        </p>
+      </div>
+
+      <footer class="mt-4 pt-4 border-t border-edge text-ink-dim text-xs flex flex-col justify-around gap-2 md:flex-row md:justify-between">
         <div class="w-fit mx-auto md:mx-0">
           Found a bug? Report an{" "}
           <a

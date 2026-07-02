@@ -34,3 +34,11 @@ const facilitatorClient = new HTTPFacilitatorClient({
 
 Install: npm install @x402/keeta @x402/core
 See the agent guide (link above) for a complete example.
+
+## Third-Party Service Notice
+
+This service is developed, operated, and maintained by an independent third party as part of the Keeta Grant Program.
+Although this service is accessible through a Keeta-owned subdomain, it is not operated by Keeta, Inc.
+The use of a Keeta subdomain does not constitute an endorsement of the service or its operator.
+Keeta does not control or assume responsibility for the service's operation, availability, content, security, or compliance.
+Your use of this service is at your own risk and is subject to the terms and privacy policy provided by the third-party operator, where applicable.
