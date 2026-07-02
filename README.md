@@ -11,7 +11,7 @@ An implementation of the [x402 payment protocol](https://github.com/x402-foundat
 - For Buyers: See the [x402 Quickstart for Buyers](https://docs.x402.org/getting-started/quickstart-for-buyers#keeta) and the example client in [apps/client](apps/client/src/main.ts).
 - For Sellers: See the [x402 Quickstart for Sellers](https://docs.x402.org/getting-started/quickstart-for-sellers) and the example server in [apps/server](apps/server/src/main.ts).
 
-The facilitator implementation in this repository is hosted at <https://facilitator.x402.kee.tools/> and contains an interactive example to complete an x402 payment on Keeta.
+The facilitator implementation in this repository is hosted at <https://facilitator.x402.keeta.com/> and contains an interactive example to complete an x402 payment on Keeta.
 
 ## How x402 works on Keeta
 
