@@ -5,7 +5,7 @@
   "main": "index.ts",
   "dependencies": {
     "@keetanetwork/pulumi-components": "^1.0.85",
-    "@pulumi/gcp": "^9.19.0",
+    "@pulumi/gcp": "^10.2.0",
     "@pulumi/pulumi": "^3.270.0"
   },
   "devDependencies": {
