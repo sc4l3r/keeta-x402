@@ -16,8 +16,8 @@ importers:
   apps/client:
     dependencies:
       '@keetanetwork/keetanet-client':
-        specifier: ^0.18.2
-        version: 0.18.2(encoding@0.1.13)
+        specifier: ^0.18.8
+        version: 0.18.8(encoding@0.1.13)
       '@x402/core':
         specifier: ^2.28.0
         version: 2.28.0
@@ -44,8 +44,8 @@ importers:
         specifier: ^0.0.78
         version: 0.0.78(@types/node@22.20.0)(encoding@0.1.13)(typescript@6.0.3)
       '@keetanetwork/keetanet-client':
-        specifier: ^0.18.2
-        version: 0.18.2(encoding@0.1.13)
+        specifier: ^0.18.8
+        version: 0.18.8(encoding@0.1.13)
       '@x402/core':
         specifier: ^2.28.0
         version: 2.28.0
@@ -686,8 +686,8 @@ packages:
   '@keetanetwork/keetanet-client@0.18.1':
     resolution: {integrity: sha512-ePGSqX9hHUWw2tsEgWeHukFDSck45B0GVJBpRqx18PYVGB/7XRXz6HVCmL+Oq9V2sC1MDx6Ttermq89nBZeIRQ==}
 
-  '@keetanetwork/keetanet-client@0.18.2':
-    resolution: {integrity: sha512-UiuNO74j7EmDGuZkWfNMDb5vnQqLIH5Y68GcTDU6KwK4ZO3DB7WKjUnQMTw1tO4nZidqizgRrT4vUaSzJ0PJPw==}
+  '@keetanetwork/keetanet-client@0.18.8':
+    resolution: {integrity: sha512-HeLwaB2+NC96sz5y7Hf8cdJHoLfmXR4up5NTedsOjNHxYftlQHtbW0uWOQ3UisnDViM+0S6sp9ZQjqjEZz5Guw==}
 
   '@keetanetwork/pulumi-components@1.0.88':
     resolution: {integrity: sha512-QtYcUIhuohUctZJ0WV9HKHvuKGalRYXpGM5q2Ybp6zKu4IIYfMWXutKIsnAugGmeTOhoiSVVSek16Y7CFEfRcw==}
@@ -4478,7 +4478,7 @@ snapshots:
     dependencies:
       lodash.camelcase: 4.3.0
       long: 5.3.2
-      protobufjs: 7.6.4
+      protobufjs: 7.6.6
       yargs: 17.7.3
     optional: true
 
@@ -4574,7 +4574,7 @@ snapshots:
       - encoding
       - supports-color
 
-  '@keetanetwork/keetanet-client@0.18.2(encoding@0.1.13)':
+  '@keetanetwork/keetanet-client@0.18.8(encoding@0.1.13)':
     dependencies:
       secp256k1: 5.0.1
     optionalDependencies:
@@ -5749,7 +5749,7 @@ snapshots:
   '@x402/keeta@2.28.0(@types/node@22.20.0)(encoding@0.1.13)(typescript@6.0.3)':
     dependencies:
       '@keetanetwork/anchor': 0.0.77(@types/node@22.20.0)(encoding@0.1.13)(typescript@6.0.3)
-      '@keetanetwork/keetanet-client': 0.18.2(encoding@0.1.13)
+      '@keetanetwork/keetanet-client': 0.18.8(encoding@0.1.13)
       '@x402/core': 2.28.0
     transitivePeerDependencies:
       - '@types/node'
@@ -6559,7 +6559,7 @@ snapshots:
       node-fetch: 2.7.0(encoding@0.1.13)
       object-hash: 3.0.0
       proto3-json-serializer: 2.0.2
-      protobufjs: 7.6.4
+      protobufjs: 7.6.6
       retry-request: 7.0.2(encoding@0.1.13)
       uuid: 9.0.1
     transitivePeerDependencies:
@@ -7582,12 +7582,12 @@ snapshots:
 
   proto3-json-serializer@2.0.2:
     dependencies:
-      protobufjs: 7.6.4
+      protobufjs: 7.6.6
     optional: true
 
   proto3-json-serializer@3.0.4:
     dependencies:
-      protobufjs: 7.6.4
+      protobufjs: 7.6.6
 
   protobufjs@7.6.4:
     dependencies:
