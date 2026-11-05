@@ -6,7 +6,7 @@ import * as KeetaNet from "@keetanetwork/keetanet-client";
 import { x402HTTPClient } from "@x402/core/http";
 import { x402Client } from "@x402/core/client";
 import { wrapFetchWithPayment } from "@x402/fetch";
-import { ExactKeetaScheme, KEETA_TESTNET_CAIP2, toClientKeetaSigner } from "@x402/keeta";
+import { ExactKeetaScheme, KEETA_TESTNET_CAIP2, KTA_TESTNET_ADDRESS, toClientKeetaSigner } from "@x402/keeta";
 
 dotenv.config({
   path: '../../.env'
@@ -27,6 +27,16 @@ async function main() {
 
   const client = new x402Client();
   client.register(KEETA_TESTNET_CAIP2, new ExactKeetaScheme(clientKeetaSigner));
+  // Only USDC is allowed by default, so opt in to KTA, capped at 0.001 KTA per payment
+  client.setSpendControls({
+    allowedAssets: [
+      {
+        network: KEETA_TESTNET_CAIP2,
+        asset: KTA_TESTNET_ADDRESS,
+        maxAmountPerPayment: "1000000000000000",
+      },
+    ],
+  });
 
   const fetchWithPayment = wrapFetchWithPayment(fetch, client);
   const httpClient = new x402HTTPClient(client);
