@@ -23,7 +23,7 @@
     "prom-client": "^15.1.3"
   },
   "devDependencies": {
-    "@preact/preset-vite": "^2.10.5",
+    "@preact/preset-vite": "^2.10.6",
     "@tailwindcss/vite": "^4.3.5",
     "@types/express": "^5.0.6",
     "@types/node": "^22.0.0",
